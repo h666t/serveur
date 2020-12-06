@@ -7,15 +7,17 @@ const db = {
   read() {
     return new Promise((resolve, reject)=>{
       fs.readFile(argsPath, {flag: 'a+'}, (err, data) => {
+        console.log('hi');
         if (err) return reject(err);
         let content = data.toString();
-        resolve(content);
+        content === '' ? resolve([]) : resolve(JSON.parse(content))
       });
     })
   },
   write(data){
+    const dataStr = JSON.stringify(data)
     return new Promise((resolve, reject)=>{
-      fs.writeFile(argsPath, data, (error) => {
+      fs.writeFile(argsPath, dataStr, (error) => {
         reject(error)
       })
     })

@@ -1,10 +1,14 @@
 {
   "name": "serveur",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "h666t <1845720928@qq.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "@types/node": "^14.14.10"
+  },
+  "dependencies": {
+    "commander": "^6.2.0"
   }
 }

@@ -14,7 +14,7 @@ if (process.argv.length === 2 ){
   //读取homedir/.serveur的参数
   db.read().then((content)=>{
     if (content === ''){
-      console.log('n');
+      let newContent = [path,port,cacheControl]
     }
   })
 }

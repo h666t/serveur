@@ -12,7 +12,15 @@ const db = {
         resolve(content);
       });
     })
+  },
+  write(data){
+    return new Promise((resolve, reject)=>{
+      fs.writeFile(argsPath, data, (error) => {
+        reject(error)
+      })
+    })
   }
+
 };
 
 module.exports = db;

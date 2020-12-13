@@ -8,7 +8,7 @@ const argsPath = p.resolve(homedir, '.serveur');
 
 const dbData = JSON.parse(fs.readFileSync(argsPath).toString())
 const {path,port,cacheControl} = dbData
-const targetPath = p.resolve(__dirname,path)
+const targetPath = p.join('..','..',path)
 
 const serveur = http.createServer()
 

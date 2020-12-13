@@ -1,5 +1,4 @@
 import db from './db';
-import {log} from 'util';
 
 const {program} = require('commander');
 const pkg = require('./package.json');

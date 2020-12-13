@@ -1,4 +1,5 @@
 import db from './db';
+import {log} from 'util';
 
 const {program} = require('commander');
 const pkg = require('./package.json');
@@ -21,6 +22,10 @@ if (process.argv.length === 4){
     const arg = process.argv[2]
     const data = process.argv[3]
     db.settingSingleDbContent(arg,data)
+}
+
+if (process.argv.length === 3 || process.argv.length > 4){
+  throw new Error('请输入正确的参数')
 }
 
 

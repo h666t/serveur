@@ -1,7 +1,7 @@
 const fs = require('fs');
 const p = require('path');
 const homedir = process.env.HOME || require('os').homedir();
-const argsPath = p.join(homedir, '.serveur');
+const argsPath = p.resolve(homedir, '.serveur');
 
 const db = {
   read() {
@@ -46,23 +46,23 @@ const db = {
     });
   },
   settingSingleDbContent(arg, data) {
-    const hash = {
-      '-p': 'port',
-      '-o': 'path',
-      '-c': 'cacheControl'
-    };
-    for (let key in hash) {
-      if (key === arg) {
-        if (arg === key) {
-          this.read().then((content) => {
-            const newContent = JSON.parse(JSON.stringify(content));
-            newContent[hash[key]] = data;
-            this.write(newContent)
-              .catch(err => err ? console.log(err) : undefined);
-          });
+      const hash = {
+        '-p': 'port',
+        '-o': 'path',
+        '-c': 'cacheControl'
+      };
+      for (let key in hash) {
+        if (key === arg) {
+          if (arg === key) {
+            this.read().then((content) => {
+              const newContent = JSON.parse(JSON.stringify(content));
+              newContent[hash[key]] = data;
+              this.write(newContent)
+                .catch(err => err ? console.log(err) : undefined);
+            });
+          }
         }
       }
-    }
   }
 };
 

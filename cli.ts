@@ -10,17 +10,15 @@ program
 
 // 不传参
 if (process.argv.length === 2) {
-  exec('tsnd serveur.ts')
+  db.autoCompleteDb()
+  exec('ts-node-dev serveur.ts')
 }
 
 //传4个参数 即类似于['D:\\Software\\nodejs\\node.exe', 'D:\\code\\p\\Item\\serveur\\cli.ts','-p','8888']
 if (process.argv.length === 4){
-    const opt = process.argv
-  if (opt[2] === '-p'){
-    db.read().then((content)=>{
-
-    })
-  }
+    const arg = process.argv[2]
+    const data = process.argv[3]
+    db.settingSingleDbContent(arg,data)
 }
 
 

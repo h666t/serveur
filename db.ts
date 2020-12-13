@@ -33,13 +33,13 @@ const db = {
       for (let key in hash) {
         if (!content[key]) {
           newContent[key] = hash[key];
-          db.write(newContent)
+          this.write(newContent)
             .catch(err => err ? console.log(err) : undefined);
         }
       }
       if (!content.path && !content.port && !content.cacheControl) {
         //写入默认的参数{path:"public",port:"8888",cacheControl:"0"}
-        db.write({path: hash.path, port: hash.port, cacheControl: hash.cacheControl})
+        this.write({path: hash.path, port: hash.port, cacheControl: hash.cacheControl})
           .catch(err => err ? console.log(err) : undefined);
         return;
       }
@@ -51,15 +51,19 @@ const db = {
       '-o': 'path',
       '-c': 'cacheControl'
     };
-    this.read().then((content) => {
-      if (!hash[arg]) return;
-      const newContent = JSON.parse(JSON.stringify(content));
-      newContent[hash[arg]] = data;
-      this.write(newContent)
-        .catch(err => err ? console.log(err) : undefined);
-    });
+    for (let key in hash) {
+      if (key === arg) {
+        if (arg === key) {
+          this.read().then((content) => {
+            const newContent = JSON.parse(JSON.stringify(content));
+            newContent[hash[key]] = data;
+            this.write(newContent)
+              .catch(err => err ? console.log(err) : undefined);
+          });
+        }
+      }
+    }
   }
-
 };
 
-module.exports = db;
+export default db;

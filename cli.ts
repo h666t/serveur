@@ -1,12 +1,14 @@
+import db from './db';
+
 const {program} = require('commander');
 const pkg = require('./package.json');
-const db = require('./db.ts');
-
 const {exec} = require("child_process");
 //通过exec可以执行命令行命令
 program
   .version(pkg.version)
   .option('-p, --port <port>', 'change the port (default:8888)')
+  .option('-o, --path <path>', 'change the path (default:public)')
+  .option('-c, --path <cacheControl>', 'change the cacheControl (default:0)')
 
 // 不传参
 if (process.argv.length === 2) {
